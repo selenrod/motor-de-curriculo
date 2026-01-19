@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Currículo - Paulo Roberto Alves Dorneles</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Painel de Controle -->
+        <div class="control-panel">
+            <h1>Editor de Currículo</h1>
+            
+            <!-- Seletor de Modo -->
+            <div class="mode-selector">
+                <h2>Selecione o Modo de Edição</h2>
+                <button onclick="setMode('editar')" id="btn-editar" class="mode-btn active">Editar Dados Existentes</button>
+                <button onclick="setMode('adicionar')" id="btn-adicionar" class="mode-btn">Adicionar Nova Informação</button>
+            </div>
+
+            <!-- Upload de Arquivo MD -->
+            <div class="upload-section">
+                <h2>Personalizar Resumo (Arquivo .md)</h2>
+                <input type="file" id="mdFile" accept=".md" onchange="loadMarkdownFile()">
+                <p class="helper-text">Carregue um arquivo .md com a descrição da vaga para personalizar o resumo profissional</p>
+            </div>
+
+            <!-- Formulário de Edição -->
+            <div id="edit-form" class="form-section" style="display:none;">
+                <h2>Editar Informações</h2>
+                
+                <!-- Dados Pessoais -->
+                <fieldset>
+                    <legend>Dados Pessoais</legend>
+                    <label>Nome Completo:
+                        <input type="text" id="nome" value="Paulo Roberto Alves Dorneles">
+                    </label>
+                    <label>Idade:
+                        <input type="number" id="idade" value="30">
+                    </label>
+                    <label>Estado Civil:
+                        <input type="text" id="estadoCivil" value="Casado">
+                    </label>
+                    <label>Endereço:
+                        <input type="text" id="endereco" value="Nova Alvorada do Sul - Mato Grosso do Sul">
+                    </label>
+                    <label>Telefone:
+                        <input type="tel" id="telefone" value="(41) 99126-9356">
+                    </label>
+                    <label>E-mail:
+                        <input type="email" id="email" value="prdorneles.eng@gmail.com">
+                    </label>
+                    <label>LinkedIn:
+                        <input type="url" id="linkedin" value="https://www.linkedin.com/in/robertodorneles/">
+                    </label>
+                    <label>Objetivo Profissional:
+                        <input type="text" id="objetivo" value="Engenheiro de Produção | Coordenador | Especialista">
+                    </label>
+                </fieldset>
+
+                <!-- Resumo Profissional -->
+                <fieldset>
+                    <legend>Resumo Profissional</legend>
+                    <textarea id="resumo" rows="10"></textarea>
+                    <p class="helper-text">Este campo será preenchido automaticamente ao carregar um arquivo .md, mas você pode editá-lo manualmente</p>
+                </fieldset>
+
+                <button onclick="applyChanges()" class="btn-primary">Aplicar Alterações</button>
+            </div>
+
+            <!-- Formulário de Adição -->
+            <div id="add-form" class="form-section" style="display:none;">
+                <h2>Adicionar Nova Informação</h2>
+                
+                <div class="add-type-selector">
+                    <label>Tipo de Informação:
+                        <select id="addType" onchange="showAddForm()">
+                            <option value="">Selecione...</option>
+                            <option value="experiencia">Experiência Profissional</option>
+                            <option value="atividade">Descrição de Atividades</option>
+                            <option value="formacao">Formação Acadêmica</option>
+                            <option value="curso">Curso/Certificação</option>
+                        </select>
+                    </label>
+                </div>
+
+                <!-- Formulário de Experiência -->
+                <fieldset id="form-experiencia" style="display:none;">
+                    <legend>Nova Experiência Profissional</legend>
+                    <label>Empresa:
+                        <input type="text" id="exp-empresa">
+                    </label>
+                    <label>Cargo:
+                        <input type="text" id="exp-cargo">
+                    </label>
+                    <label>Período:
+                        <input type="text" id="exp-periodo" placeholder="Ex: 01/2023 - 12/2024">
+                    </label>
+                </fieldset>
+
+                <!-- Formulário de Atividades Profissionais -->
+                <fieldset id="form-atividade" style="display:none;">
+                    <legend>Nova Descrição de Atividade Profissional</legend>
+                    <label>Empresa/Cargo:
+                        <input type="text" id="ativ-empresa" placeholder="Ex: EMPRESA (Último Cargo)">
+                    </label>
+                    <label>Descrição das Atividades:
+                        <textarea id="ativ-descricao" rows="6" placeholder="Descreva as atividades desenvolvidas nesta posição"></textarea>
+                    </label>
+                </fieldset>
+
+                <!-- Formulário de Formação -->
+                <fieldset id="form-formacao" style="display:none;">
+                    <legend>Nova Formação Acadêmica</legend>
+                    <label>Grau (Ex: Graduação, Pós-Graduação):
+                        <input type="text" id="form-grau">
+                    </label>
+                    <label>Curso:
+                        <input type="text" id="form-curso">
+                    </label>
+                    <label>Instituição:
+                        <input type="text" id="form-instituicao">
+                    </label>
+                    <label>Ano de Conclusão:
+                        <input type="number" id="form-conclusao">
+                    </label>
+                </fieldset>
+
+                <!-- Formulário de Curso -->
+                <fieldset id="form-curso" style="display:none;">
+                    <legend>Novo Curso/Certificação</legend>
+                    <label>Nome do Curso:
+                        <input type="text" id="curso-nome">
+                    </label>
+                    <label>Instituição:
+                        <input type="text" id="curso-instituicao">
+                    </label>
+                    <label>Ano:
+                        <input type="number" id="curso-ano">
+                    </label>
+                </fieldset>
+
+                <button onclick="addNewItem()" class="btn-primary" style="display:none;" id="btn-add-item">Adicionar Item</button>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="action-buttons">
+                <button onclick="generatePDF()" class="btn-success">Gerar PDF</button>
+                <button onclick="resetForm()" class="btn-secondary">Resetar Dados</button>
+            </div>
+        </div>
+
+        <!-- Preview do Currículo -->
+        <div class="preview-panel">
+            <div id="curriculum" class="curriculum">
+                <div class="header">
+                        <div class="header">
+                    <h1 id="preview-nome">Paulo Roberto Alves Dorneles</h1>
+                            </div>
+                    <div id="preview-info-pessoal">30 anos - Casado</div>
+                    <div class="contact-info">
+                        <p><strong>Endereço:</strong> <span id="preview-endereco">Nova Alvorada do Sul - Mato Grosso do Sul</span></p>
+                        <p><strong>Telefones:</strong> <span id="preview-telefone">(41) 99126-9356</span> | <strong>E-mail:</strong> <span id="preview-email">prdorneles.eng@gmail.com</span></p>
+                        <p><strong>LinkedIn:</strong> <span id="preview-linkedin">https://www.linkedin.com/in/robertodorneles/</span></p>
+                    </div>
+                    <p class="objetivo"><strong>Objetivo Profissional:</strong> <span id="preview-objetivo">Engenheiro de Produção | Coordenador | Especialista</span></p>
+                </div>
+
+                <div class="section">
+                    <h2>RESUMO</h2>
+                    <div id="preview-resumo">
+                       Sou um Profissional com mais de 7 anos de experiência e sólida atuação em Melhoria Contínua e Excelência Operacional em setores de energia, fabricação de estruturas e também no setor sucroenergético. Histórico comprovado na implantação de culturas de melhoria do zero, liderando a execução de projetos Lean Six Sigma e Kaizen com foco em eficiência, segurança e compliance. Sou Especialista em liderança por influência, com forte habilidade em traduzir diretrizes estratégicas corporativas para a realidade operacional (chão de fábrica), engajando equipes multidisciplinares sem autoridade hierárquica direta.
+                        Possuo perfil analítico com domínio de ferramentas estatísticas (R, Minitab, Power BI) aliado à visão de governança corporativa (SGI). Destaco-me pela capacidade de resolver problemas complexos e inéditos (disruptivos), conectando visões distintas para criar soluções perenes. Busco atuar como agente de transformação, unindo visão consultiva interna e execução prática.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>FORMAÇÃO ACADÊMICA</h2>
+                    <ul id="preview-formacao">
+                        <li><strong>Pós-Graduação em Gerenciamento de Projetos</strong><br>
+                            Instituição: Fundação Getúlio Vargas<br>
+                            Conclusão: 2022</li>
+                        <li><strong>Graduação em Engenharia de Produção</strong><br>
+                            Instituição: Universidade Católica Do Tocantins<br>
+                            Conclusão: 2019</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>EXPERIÊNCIA PROFISSIONAL</h2>
+                    <ul id="preview-experiencias">
+                        <div class="experience-item">
+                            <li><strong>ATVOS Agroindustrial</strong><br>
+                            Período: 07/2024 - Atual<br>
+                            Cargo: Trainee Geração Agro</li>
+                        </div>
+                        <div class="experience-item">
+                            <li><strong>CWB Eletric</strong><br>
+                            Período: 05/2022 - 03/2024<br>
+                            Cargo: Engenheiro de produção</li>  
+                        </div>
+                        <div class="experience-item">
+                            <li><strong>IPPER Solar</strong><br>
+                            Período: 03/2021 - 04/2022<br>
+                            Cargo: Coordenador de Projetos</li>
+                            <ol>Período: 07/2019 - 03/2021<br>
+                            Cargo: Trainee</ol>
+                        </div>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>DESCRIÇÃO DAS ATIVIDADES PROFISSIONAIS</h2>
+                    <ul id="preview-atividades">
+                    <li><Strong>ATVOS Agroindustrial (Trainee Geração Agro):</Strong> Responsável pela estruturação da área de Melhoria Contínua da unidade, liderando projetos transversais com foco em eficiência operacional, redução de variabilidade e padronização.
+                        - Gestão da Rotina e Projetos: Liderança de 5 ciclos Kaizen e +90 quick wins (Ver & Agir), focando na otimização de recursos, com implantação com custo ZERO e gestão de tempo das equipes envolvidas.
+                        - Mentoria Técnica: Suporte direto na condução de 67 projetos Lean Six Sigma (Yellow Belt) utilizando o framework DMAIC, garantindo o alinhamento dos indicadores de projeto com os KPIs estratégicos da companhia (pilares de negócio).
+                        - Governança e Processos: Co-autoria na criação do sistema de gestão (SGI) da empresa, implementando controles de acesso, nuvem e dashboards executivos que eliminaram controles paralelos e aumentaram a confiabilidade dos dados para auditoria.
+                        - Visão Sistêmica: Atuação na padronização de processos logísticos em 8 plantas, harmonizando demandas da Operação, CTT e Diretoria Agrícola.</li>
+                    <li><strong>CWB Eletric (Engenheiro de produção):</strong> Liderando a otimização dos processos da empresa, com foco na eficiência e na produtividade; Realizando análises detalhadas das atividades da empresa,
+                        identificando oportunidades de melhorias e otimização; Gerenciando o processo de compra de materiais para projetos em andamento, garantindo o cumprimento de prazos e orçamentos; Buscando e
+                        assegurando a disponibilidade de recursos para o andamento das obras, de acordo com o cronograma estabelecido; Analisando os custos das atividades em curso e definindo prioridades para as compras
+                        de materiais, otimizando o uso dos recursos da empresa; Realizando o mapeamento dos processos e intervindo quando necessário para corrigir falhas e otimizar o desempenho; Implementando e
+                        monitorando a padronização de todos os processos da empresa, com foco na qualidade e na consistência dos resultados; Assegurando que os processos sejam documentados e facilmente
+                        auditáveis, para garantir a conformidade com os padrões de qualidade; Elaborando Procedimentos Operacionais Padronizados (POPs) para todos os setores da empresa, especialmente para a equipe de
+                        projetos, garantindo a clareza e a padronização das atividades; Realizando desenhos peças para fabricação, fabricando estruturas solares e galvanizando peças; Atendendo às necessidades
+                        específicas dos clientes, desenvolvendo e fabricando soluções personalizadas; Controlando a máquina de plasma CNC durante o processo de corte, monitorando os parâmetros e realizando ajustes quando
+                        necessário, garantindo a qualidade do corte.</li>
+                    <li><strong>IPPER Solar (Coordenador de Projetos):</strong> Coordenando projetos de energia solar fotovoltaica, desde a concepção até a implementação, garantindo o cumprimento dos prazos e orçamentos estabelecidos; Liderando equipes multidisciplinares, promovendo a colaboração e a comunicação eficaz entre os membros da equipe; Desenvolvendo cronogramas detalhados para cada fase do projeto, monitorando o progresso e ajustando conforme necessário para garantir a entrega bem-sucedida; Gerenciando recursos do projeto, incluindo orçamento, pessoal e materiais, para otimizar a eficiência e minimizar custos; Identificando e mitigando riscos potenciais ao longo do ciclo de vida do projeto, implementando estratégias de contingência quando necessário; Comunicando-se regularmente com stakeholders, fornecendo atualizações sobre o progresso do projeto e abordando quaisquer preocupações ou questões que possam surgir.</li>
+                    <li><strong>IPPER Solar (Trainee):</strong> Apoiando a equipe de projetos na execução de atividades operacionais, contribuindo para o cumprimento dos prazos e metas estabelecidas; Participando da análise de dados e relatórios técnicos, auxiliando na tomada de decisões estratégicas; Colaborando com os membros da equipe para resolver problemas técnicos e otimizar processos; Realizando tarefas administrativas e logísticas relacionadas aos projetos em andamento.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>CURSOS</h2>
+                    <ul id="preview-cursos">
+                        <li>Formação de Auditores SGQ ISO 9001:2015 - Grupo Voitto</li>
+                        <li>Expert em Cana-de-Açúcar - AgroAdvance - 2025</li>
+                        <li>Lean Six Sigma Yellow Belt - Seta Desenvolvimento Gerencial - 2025</li>
+                        <li>Lean Six Sigma White Belt - MF Treinamentos - 2021;</li>
+                        <li>Microsoft Project Recursos Avançados - Bessa Consultores - 2020;</li>
+                        <li>Gerenciando Projetos com Microsoft Project - Bessa Consultores - 2020.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>FERRAMENTAS E CONHECIMENTOS APLICÁVEIS</h2>
+                    <h4>FERRAMENTAS IA</h4>
+                    <ul>
+                        <li>Gemini 3 PRO</li>
+                        <li>Perplexity AI PRO</li>
+                        <li>Google AI Studio</li>
+                        <li>n8n</li>
+                        <li>Criação e Utilização de Agentes IA para diversas finalidades</li>
+                    </ul>
+                    <h4>OUTRAS FERRAMENTAS</h4>
+                    <ul>
+                        <li>Office 365 | Microsoft Office | Excel Avançado + VBA</li>
+                        <li>Microsoft Project</li>
+                        <li>Microsoft Power BI</li>
+                        <li>R Studio</li>
+                        <li>VS Code</li>
+                        <li>AutoCAD</li>
+                        <li>Tekla Structures</li>
+                        <li>Bizagi Modeler</li>
+                        <li>MiniTab</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
