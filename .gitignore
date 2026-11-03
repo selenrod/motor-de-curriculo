@@ -1,0 +1,6 @@
+# Locais da máquina do usuário (não versionar)
+vagas-dir.local.txt
+Vagas/
+saida/
+__pycache__/
+*.pyc

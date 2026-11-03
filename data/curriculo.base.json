@@ -1,0 +1,173 @@
+{
+  "versaoEsquema": 1,
+  "secoes": {
+    "ordem": [
+      "resumo",
+      "formacao",
+      "experiencias",
+      "atividades",
+      "cursos",
+      "ferramentas"
+    ],
+    "ocultas": []
+  },
+  "nome": "Roberto Dorneles, PMP",
+  "nomeArquivo": "PAULO_ROBERTO_ALVES_DORNELES",
+  "infoPessoal": "30 anos - Casado",
+  "endereco": "São Paulo - São Paulo",
+  "telefone": "(41) 99126-9356",
+  "email": "prdorneles.eng@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/robertodorneles/",
+  "objetivo": "Gerente de Projetos | Engenheiro de Planejamento | PMO | Gestão de Capex | Transformação Digital",
+  "resumo": "Sou um Profissional com mais de 7 anos de experiência e sólida atuação em Melhoria Contínua e Excelência Operacional em setores de energia, fabricação de estruturas e também no setor sucroenergético. Histórico comprovado na implantação de culturas de melhoria do zero, liderando a execução de projetos Lean Six Sigma e Kaizen com foco em eficiência, segurança e compliance. Sou Especialista em liderança por influência, com forte habilidade em traduzir diretrizes estratégicas corporativas para a realidade operacional (chão de fábrica), engajando equipes multidisciplinares sem autoridade hierárquica direta. Possuo perfil analítico com domínio de ferramentas estatísticas (R, Minitab, Power BI) aliado à visão de governança corporativa (SGI). Destaco-me pela capacidade de resolver problemas complexos e inéditos (disruptivos), conectando visões distintas para criar soluções perenes. Busco atuar como agente de transformação, unindo visão consultiva interna e execução prática.",
+  "formacao": [
+    {
+      "titulo": "Pós-Graduação em Gerenciamento de Projetos",
+      "instituicao": "Fundação Getúlio Vargas",
+      "conclusao": "2022"
+    },
+    {
+      "titulo": "Graduação em Engenharia de Produção",
+      "instituicao": "Universidade Católica Do Tocantins",
+      "conclusao": "2019"
+    }
+  ],
+  "experiencias": [
+    {
+      "empresa": "ATVOS Agroindustrial",
+      "periodos": [
+        {
+          "periodo": "04/2026 - Atual",
+          "cargo": "Engenheiro de Planejamento"
+        },
+        {
+          "periodo": "07/2024 - Atual",
+          "cargo": "Trainee Geração Agro"
+        }
+      ]
+    },
+    {
+      "empresa": "CWB Eletric",
+      "periodos": [
+        {
+          "periodo": "05/2022 - 03/2024",
+          "cargo": "Engenheiro de produção"
+        }
+      ]
+    },
+    {
+      "empresa": "IPPER Solar",
+      "periodos": [
+        {
+          "periodo": "03/2021 - 04/2022",
+          "cargo": "Coordenador de Projetos"
+        },
+        {
+          "periodo": "07/2019 - 03/2021",
+          "cargo": "Trainee"
+        }
+      ]
+    }
+  ],
+  "atividades": [
+    {
+      "titulo": "ATVOS Agroindustrial (Engenheiro de Planejamento | PMO)",
+      "itens": [
+        "Responsável pela gestão do portfólio e saúde da carteira."
+      ],
+      "refino": {
+        "contexto": false,
+        "problema": false,
+        "acao": false,
+        "como": false,
+        "resultado": false,
+        "porque": false
+      }
+    },
+    {
+      "titulo": "ATVOS Agroindustrial (Trainee Geração Agro)",
+      "itens": [
+        "Responsável pela estruturação da área de Melhoria Contínua da unidade, liderando projetos transversais com foco em eficiência operacional, redução de variabilidade e padronização.",
+        "Gestão da Rotina e Projetos: Liderança de 5 ciclos Kaizen e +90 quick wins (Ver & Agir), focando na otimização de recursos, com implantação com custo ZERO e gestão de tempo das equipes envolvidas.",
+        "Mentoria Técnica: Suporte direto na condução de 67 projetos Lean Six Sigma (Yellow Belt) utilizando o framework DMAIC, garantindo o alinhamento dos indicadores de projeto com os KPIs estratégicos da companhia (pilares de negócio).",
+        "Governança e Processos: Co-autoria na criação do sistema de gestão (SGI) da empresa, implementando controles de acesso, nuvem e dashboards executivos que eliminaram controles paralelos e aumentaram a confiabilidade dos dados para auditoria.",
+        "Visão Sistêmica: Atuação na padronização de processos logísticos em 8 plantas, harmonizando demandas da Operação, CTT e Diretoria Agrícola."
+      ],
+      "refino": null
+    },
+    {
+      "titulo": "CWB Eletric (Engenheiro de produção)",
+      "itens": [
+        "Liderando a otimização dos processos da empresa, com foco na eficiência e na produtividade",
+        "Realizando análises detalhadas das atividades da empresa, identificando oportunidades de melhorias e otimização",
+        "Gerenciando o processo de compra de materiais para projetos em andamento, garantindo o cumprimento de prazos e orçamentos",
+        "Buscando e assegurando a disponibilidade de recursos para o andamento das obras, de acordo com o cronograma estabelecido",
+        "Analisando os custos das atividades em curso e definindo prioridades para as compras de materiais, otimizando o uso dos recursos da empresa",
+        "Realizando o mapeamento dos processos e intervindo quando necessário para corrigir falhas e otimizar o desempenho",
+        "Implementando e monitorando a padronização de todos os processos da empresa, com foco na qualidade e na consistência dos resultados",
+        "Assegurando que os processos sejam documentados e facilmente auditáveis, para garantir a conformidade com os padrões de qualidade",
+        "Elaborando Procedimentos Operacionais Padronizados (POPs) para todos os setores da empresa, especialmente para a equipe de projetos, garantindo a clareza e a padronização das atividades",
+        "Realizando desenhos peças para fabricação, fabricando estruturas solares e galvanizando peças",
+        "Atendendo às necessidades específicas dos clientes, desenvolvendo e fabricando soluções personalizadas",
+        "Controlando a máquina de plasma CNC durante o processo de corte, monitorando os parâmetros e realizando ajustes quando necessário, garantindo a qualidade do corte."
+      ],
+      "refino": null
+    },
+    {
+      "titulo": "IPPER Solar (Coordenador de Projetos)",
+      "itens": [
+        "Coordenando projetos de energia solar fotovoltaica, desde a concepção até a implementação, garantindo o cumprimento dos prazos e orçamentos estabelecidos",
+        "Liderando equipes multidisciplinares, promovendo a colaboração e a comunicação eficaz entre os membros da equipe",
+        "Desenvolvendo cronogramas detalhados para cada fase do projeto, monitorando o progresso e ajustando conforme necessário para garantir a entrega bem-sucedida",
+        "Gerenciando recursos do projeto, incluindo orçamento, pessoal e materiais, para otimizar a eficiência e minimizar custos",
+        "Identificando e mitigando riscos potenciais ao longo do ciclo de vida do projeto, implementando estratégias de contingência quando necessário",
+        "Comunicando-se regularmente com stakeholders, fornecendo atualizações sobre o progresso do projeto e abordando quaisquer preocupações ou questões que possam surgir."
+      ],
+      "refino": null
+    },
+    {
+      "titulo": "IPPER Solar (Trainee)",
+      "itens": [
+        "Apoiando a equipe de projetos na execução de atividades operacionais, contribuindo para o cumprimento dos prazos e metas estabelecidas",
+        "Participando da análise de dados e relatórios técnicos, auxiliando na tomada de decisões estratégicas",
+        "Colaborando com os membros da equipe para resolver problemas técnicos e otimizar processos",
+        "Realizando tarefas administrativas e logísticas relacionadas aos projetos em andamento."
+      ],
+      "refino": null
+    }
+  ],
+  "cursos": [
+    "Formação de Auditores SGQ ISO 9001:2015 - Grupo Voitto",
+    "Expert em Cana-de-Açúcar - AgroAdvance - 2025",
+    "Lean Six Sigma Yellow Belt - Seta Desenvolvimento Gerencial - 2025",
+    "Lean Six Sigma White Belt - MF Treinamentos - 2021",
+    "Microsoft Project Recursos Avançados - Bessa Consultores - 2020",
+    "Gerenciando Projetos com Microsoft Project - Bessa Consultores - 2020"
+  ],
+  "ferramentas": [
+    {
+      "grupo": "FERRAMENTAS IA",
+      "itens": [
+        "Gemini 3 PRO",
+        "Perplexity AI PRO",
+        "Google AI Studio",
+        "n8n",
+        "Criação e Utilização de Agentes IA para diversas finalidades"
+      ]
+    },
+    {
+      "grupo": "OUTRAS FERRAMENTAS",
+      "itens": [
+        "Office 365 | Microsoft Office | Excel Avançado + VBA",
+        "Microsoft Project",
+        "Microsoft Power BI",
+        "R Studio",
+        "VS Code",
+        "AutoCAD",
+        "Tekla Structures",
+        "Bizagi Modeler",
+        "MiniTab"
+      ]
+    }
+  ]
+}
