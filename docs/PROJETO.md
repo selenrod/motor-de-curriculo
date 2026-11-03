@@ -28,7 +28,9 @@ site (Chrome/Edge) ◄── "Abrir pasta de vagas" → escolhe a vaga
 | PDF | Impressão do navegador (e `tools/render_pdf.py` com o mesmo leiaute) | Texto selecionável, necessário para ATS; geradores por imagem não servem |
 | Edição | Campos editáveis no próprio documento (visão de componentes) | Substitui o formulário que só permitia adicionar |
 | Versões | `R0` gerada pelo Claude; edições do site viram `R1`, `R2`… | Histórico por vaga, nada é sobrescrito |
-| Refinamento | `/refinar` + aba Qualidade + `refino` por atividade | Preenche as seis perguntas sem inventar resultados |
+| Refinamento | `/refinar` + aba Qualidade + `refino` por atividade | Preenche as perguntas sem inventar resultados |
+| Perguntas | `data/perguntas.json` com conjuntos `base`, `competitivo` e `executivo`; o `/vaga` escolhe um por rodada | O nível de concorrência da vaga define o grau de exigência; as perguntas evoluem sem mexer no código |
+| Projeto no Claude | Pacote em `docs/projeto-claude/` com as instruções e a lista de arquivos | Uso pelo chat e Cowork; o repositório continua sendo a fonte de verdade |
 | Privacidade | Vagas, cartas e PDFs ficam no Drive, fora do repositório público | O repositório é aberto |
 
 ## Limites conhecidos

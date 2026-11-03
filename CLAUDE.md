@@ -15,7 +15,8 @@ Responda sempre em português do Brasil, de forma concisa e precisa.
 - `index.html`, `script.js`, `styles.css`: site estático (GitHub Pages: selenrod.github.io/motor-de-curriculo). Currículo editável na própria página, seletor de vagas, versões R0, R1…, carta em Markdown, PDF pela impressão do navegador.
 - `data/curriculo.base.json`: currículo base (ponto de partida de toda vaga).
 - `data/banco-de-fatos.md`: fatos confirmados e lacunas por experiência.
-- `docs/principais-perguntas-curriculo.md`: as perguntas que cada experiência deve responder.
+- `data/perguntas.json`: conjuntos de perguntas por nível de concorrência (`base`, `competitivo`, `executivo`), com versão e histórico. É a fonte das perguntas usadas pelo site, pelo `/vaga` e pelo `/refinar`.
+- `docs/principais-perguntas-curriculo.md`: origem e justificativa das perguntas.
 - `tools/render_pdf.py`: gera os PDFs de uma pasta de vaga com o mesmo leiaute do site (texto selecionável, ATS).
 - `.claude/commands/vaga.md` (`/vaga`) e `.claude/commands/refinar.md` (`/refinar`).
 
@@ -27,7 +28,7 @@ O caminho está em `vagas-dir.local.txt` (raiz do repositório, não versionado)
 Vagas/
   _entrada/                       prints novos de vagas (o /vaga processa e move)
   2026-11-02_Empresa_Cargo/
-    vaga.json                     {empresa, cargo, link, status, criadoEm, atualizadoEm, ultimaVersao}
+    vaga.json                     {empresa, cargo, link, status, conjuntoPerguntas, criadoEm, atualizadoEm, ultimaVersao}
     vaga.md                       texto da vaga extraído do print
     print_vaga.png                print original
     curriculo_R0.json             currículo completo desta vaga (mesmo formato do base)
@@ -53,9 +54,15 @@ Responde: quem é o profissional, em que contextos atua, qual problema resolve, 
 - Comece com "Prezados(as)," e termine com "Atenciosamente," e o nome.
 - Não repita o currículo; escolha as evidências mais ligadas à vaga.
 
-## Perguntas que cada experiência deve responder
-Contexto · Problema/responsabilidade · Ação específica · Como (ferramentas e métodos) · Resultado mensurável · Por que importa para a próxima vaga.
-Cada atividade em `curriculo.json` tem `refino` com essas seis chaves (`true` = respondida no texto; `null` = não avaliada).
+## Perguntas que cada experiência deve responder (por rodada do /vaga)
+As perguntas ficam em `data/perguntas.json`, em conjuntos por nível de concorrência. Cada rodada do `/vaga` escolhe **um** conjunto e grava o id em `vaga.json` (`conjuntoPerguntas`):
+- `base` (padrão): contexto, problema, ação, como, resultado, por que importa (6 perguntas).
+- `competitivo` (muitas candidaturas): base + escala, linha de base (antes → depois), stakeholders e evidência verificável.
+- `executivo` (gerência, coordenação, PMO): competitivo + decisão de negócio, risco gerenciado e liderança de pessoas.
+
+Cada atividade tem `refino` com uma chave por pergunta (`true` = respondida e confirmada; `false` = falta; `null` = não avaliada). Chaves de conjuntos não usados podem estar ausentes; ausente conta como não respondida.
+
+**Para melhorar as perguntas:** edite `data/perguntas.json` (rótulo, texto de `entrevista`, ou quais perguntas entram em cada conjunto), aumente `versao`, acrescente uma linha em `historico` com o motivo e faça o commit. Para criar um novo nível, adicione um conjunto em `conjuntos` e descreva em `quando` o critério de uso. Nunca apague uma pergunta já usada em `refino` sem avisar o Roberto.
 
 ## Pendências conhecidas do currículo base (não corrija sem confirmar com o Roberto)
 - ATVOS: o cargo de Trainee está como "07/2024 - Atual" e o de Engenheiro de Planejamento como "04/2026 - Atual" (sobreposição).

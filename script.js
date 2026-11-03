@@ -21,14 +21,47 @@ const SECOES = {
 };
 const ORDEM_PADRAO = Object.keys(SECOES);
 
-const PERGUNTAS = [
-    ['contexto', 'Contexto (empresa, setor, porte, orçamento, equipe)'],
-    ['problema', 'Problema ou responsabilidade (o desafio real)'],
-    ['acao', 'Ação específica sua (verbo forte)'],
-    ['como', 'Como fez (ferramentas e métodos)'],
-    ['resultado', 'Resultado mensurável (número, prazo, custo)'],
-    ['porque', 'Por que importa para a próxima vaga']
-];
+/* Perguntas por conjunto: vêm de data/perguntas.json (editável sem mexer no código).
+   Este padrão só é usado se o arquivo não carregar. */
+const PERGUNTAS_URL = 'data/perguntas.json';
+const PERGUNTAS_PADRAO = {
+    padrao: 'base',
+    conjuntos: { base: { rotulo: 'Base', perguntas: ['contexto', 'problema', 'acao', 'como', 'resultado', 'porque'] } },
+    perguntas: {
+        contexto: { rotulo: 'Contexto (empresa, setor, porte, orçamento, equipe)' },
+        problema: { rotulo: 'Problema ou responsabilidade (o desafio real)' },
+        acao: { rotulo: 'Ação específica sua (verbo forte)' },
+        como: { rotulo: 'Como fez (ferramentas e métodos)' },
+        resultado: { rotulo: 'Resultado mensurável (número, prazo, custo)' },
+        porque: { rotulo: 'Por que importa para a próxima vaga' }
+    }
+};
+let PERG = PERGUNTAS_PADRAO;
+
+function conjuntoAtual() {
+    const id = App.vaga && App.vaga.conjuntoPerguntas;
+    return PERG.conjuntos[id] ? id : PERG.padrao;
+}
+
+/** Perguntas do conjunto da vaga aberta (ou do padrão, no currículo base): [[id, rótulo], ...] */
+function perguntasAtuais() {
+    return PERG.conjuntos[conjuntoAtual()].perguntas
+        .filter(id => PERG.perguntas[id])
+        .map(id => [id, PERG.perguntas[id].rotulo]);
+}
+
+async function carregarPerguntas() {
+    try {
+        const r = await fetch(PERGUNTAS_URL, { cache: 'no-store' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const d = await r.json();
+        if (!d.conjuntos || !d.perguntas || !d.conjuntos[d.padrao]) throw new Error('formato inválido');
+        PERG = d;
+    } catch (e) {
+        PERG = PERGUNTAS_PADRAO;
+        aviso('Não consegui carregar data/perguntas.json; usando as 6 perguntas básicas.', true);
+    }
+}
 
 const BASE_URL = 'data/curriculo.base.json';
 const LS_BASE = 'mc.base.v1';
@@ -94,7 +127,7 @@ function baixar(nome, texto, tipo = 'text/plain') {
 
 /* ---------- Modelo de dados ---------- */
 function novoRefino() {
-    return Object.fromEntries(PERGUNTAS.map(([k]) => [k, false]));
+    return Object.fromEntries(perguntasAtuais().map(([k]) => [k, false]));
 }
 
 function normalizar(c) {
@@ -275,8 +308,8 @@ function atividadeLi(cv, a, i) {
         it.length ? ed(it, 0, { ph: 'Descreva a atividade e o resultado', onEnter: () => novo(1) }) : null,
         it.length ? ctl(it, 0, { up: false, rot: 'Remover este item' }) : null,
         ctl(cv.atividades, i, { rot: 'Remover esta empresa/cargo e todos os seus itens' }),
-        a.refino && Object.values(a.refino).some(v => !v)
-            ? h('span', { class: 'lint no-print', text: `⚠ refinar ${Object.values(a.refino).filter(Boolean).length}/6` })
+        a.refino && perguntasAtuais().some(([k]) => !a.refino[k])
+            ? h('span', { class: 'lint no-print', text: `⚠ refinar ${perguntasAtuais().filter(([k]) => a.refino[k]).length}/${perguntasAtuais().length}` })
             : (semNumero(a) ? h('span', { class: 'lint no-print', text: '⚠ sem número' }) : null));
 
     const sub = h('ul', { class: 'sub' }, it.slice(1).map((_, k) => {
@@ -417,17 +450,22 @@ function renderCarta() {
 
 /* ---------- Painel lateral ---------- */
 const CAMPOS_VAGA = {
-    vagaEmpresa: 'empresa', vagaCargo: 'cargo', vagaLink: 'link', vagaStatus: 'status', vagaDescricao: 'descricao'
+    vagaEmpresa: 'empresa', vagaCargo: 'cargo', vagaLink: 'link', vagaStatus: 'status', vagaDescricao: 'descricao',
+    vagaConjunto: 'conjuntoPerguntas'
 };
 
 function preencherPainelVaga() {
     const tem = !!App.vaga;
     $('#vagaAviso').hidden = tem;
+    const selC = $('#vagaConjunto');
+    selC.replaceChildren(...Object.entries(PERG.conjuntos).map(([id, c]) => h('option', { value: id, text: c.rotulo || id })));
     for (const [id, k] of Object.entries(CAMPOS_VAGA)) {
         const e = $('#' + id);
         e.disabled = !tem;
         e.value = tem ? (App.vaga[k] ?? '') : '';
     }
+    selC.value = conjuntoAtual();
+    $('#conjuntoQuando').textContent = (PERG.conjuntos[conjuntoAtual()] || {}).quando || '';
     $('#mdFile').disabled = !tem;
 }
 
@@ -453,7 +491,9 @@ function renderSecoes() {
 
 function renderQualidade() {
     const box = $('#listaQualidade');
-    box.replaceChildren(...App.cv.atividades.map(a => {
+    const ps = perguntasAtuais();
+    const cab = h('p', { class: 'ajuda', text: `Conjunto de perguntas: ${PERG.conjuntos[conjuntoAtual()].rotulo || conjuntoAtual()} (${ps.length} perguntas). Para trocar, use a aba Vaga.` });
+    box.replaceChildren(cab, ...App.cv.atividades.map(a => {
         const item = h('div', { class: 'q-item' }, h('h4', { text: a.titulo || '(sem título)' }));
         if (!a.refino) {
             item.append(
@@ -461,11 +501,11 @@ function renderQualidade() {
                 h('button', {
                     class: 'btn', type: 'button',
                     onclick: () => { a.refino = novoRefino(); marcarSujo(); renderQualidade(); renderCV(); }
-                }, 'Avaliar com as 6 perguntas'));
+                }, `Avaliar com as ${ps.length} perguntas`));
         } else {
-            const n = PERGUNTAS.filter(([k]) => a.refino[k]).length;
-            item.append(h('div', { class: 'q-bar' }, h('i', { style: `width:${Math.round(n / 6 * 100)}%` })));
-            for (const [k, rot] of PERGUNTAS) {
+            const n = ps.filter(([k]) => a.refino[k]).length;
+            item.append(h('div', { class: 'q-bar' }, h('i', { style: `width:${Math.round(n / ps.length * 100)}%` })));
+            for (const [k, rot] of ps) {
                 const cb = h('input', { type: 'checkbox', checked: !!a.refino[k] });
                 cb.addEventListener('change', () => { a.refino[k] = cb.checked; marcarSujo(); renderQualidade(); renderCV(); });
                 item.append(h('label', {}, cb, rot));
@@ -779,6 +819,10 @@ function ligarPainel() {
     for (const [id, k] of Object.entries(CAMPOS_VAGA)) {
         $('#' + id).addEventListener('input', e => { if (App.vaga) { App.vaga[k] = e.target.value; marcarSujo(); } });
     }
+    $('#vagaConjunto').addEventListener('change', () => {
+        $('#conjuntoQuando').textContent = (PERG.conjuntos[conjuntoAtual()] || {}).quando || '';
+        renderQualidade(); renderCV();
+    });
     $('#mdFile').addEventListener('change', async e => {
         const f = e.target.files[0];
         if (!f || !App.vaga) return;
@@ -861,6 +905,7 @@ function ligarPainel() {
 /* ---------- Início ---------- */
 async function init() {
     ligarPainel();
+    await carregarPerguntas();
     try {
         App.base = await carregarBase();
     } catch (e) {

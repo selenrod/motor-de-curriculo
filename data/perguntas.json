@@ -1,0 +1,79 @@
+{
+  "versao": 1,
+  "descricao": "Perguntas que cada experiência do currículo deve responder, organizadas em conjuntos por nível de concorrência da vaga. O /vaga escolhe um conjunto por rodada e registra em vaga.json (conjuntoPerguntas). Origem e justificativa: docs/principais-perguntas-curriculo.md.",
+  "padrao": "base",
+  "conjuntos": {
+    "base": {
+      "rotulo": "Base (concorrência baixa ou média)",
+      "quando": "Padrão. Vagas com poucos candidatos ou sem sinal de concorrência alta.",
+      "perguntas": ["contexto", "problema", "acao", "como", "resultado", "porque"]
+    },
+    "competitivo": {
+      "rotulo": "Competitivo (concorrência alta)",
+      "quando": "Vaga com muitas candidaturas (ex.: 'mais de 100 candidaturas' no print), empresa muito disputada ou requisitos muito específicos.",
+      "perguntas": ["contexto", "escala", "problema", "acao", "como", "resultado", "linha_de_base", "stakeholders", "evidencia", "porque"]
+    },
+    "executivo": {
+      "rotulo": "Executivo (gerência, coordenação, PMO)",
+      "quando": "Cargos de gerente, coordenador, head ou PMO, ou vagas que pedem liderança e decisão.",
+      "perguntas": ["contexto", "escala", "problema", "acao", "como", "resultado", "linha_de_base", "stakeholders", "decisao", "risco", "equipe", "evidencia", "porque"]
+    }
+  },
+  "perguntas": {
+    "contexto": {
+      "rotulo": "Contexto (empresa, setor, porte, orçamento, equipe)",
+      "entrevista": "Em que contexto foi isso? Quantos projetos, qual setor, que áreas ou unidades?"
+    },
+    "escala": {
+      "rotulo": "Escala (orçamento, nº de projetos, equipe, prazo)",
+      "entrevista": "Qual o tamanho do que você gerenciava? Valor de Capex ou orçamento, número de projetos, pessoas envolvidas, duração."
+    },
+    "problema": {
+      "rotulo": "Problema ou responsabilidade (o desafio real)",
+      "entrevista": "O que estava errado ou faltando antes? Atraso, desvio de custo, falta de visão consolidada, controles paralelos?"
+    },
+    "acao": {
+      "rotulo": "Ação específica sua (verbo forte)",
+      "entrevista": "O que você, pessoalmente, implantou, criou ou passou a fazer? Cite rito, indicador, cronograma, painel."
+    },
+    "como": {
+      "rotulo": "Como fez (ferramentas e métodos)",
+      "entrevista": "Com quais ferramentas e métodos? Ex.: MS Project, Power BI, curva S, EVM, caminho crítico, Lean Six Sigma."
+    },
+    "resultado": {
+      "rotulo": "Resultado mensurável (número, prazo, custo)",
+      "entrevista": "Qual foi o resultado em número? Prazo, custo, tempo de relatório, aderência, nº de projetos entregues. Se não houver número, qual a mudança verificável?"
+    },
+    "linha_de_base": {
+      "rotulo": "Linha de base (antes → depois)",
+      "entrevista": "Como era antes e como ficou depois? Dê os dois valores para a comparação ser clara."
+    },
+    "stakeholders": {
+      "rotulo": "Stakeholders e influência (com quem e que decisões)",
+      "entrevista": "Com quem você trabalhou (diretoria, operação, fornecedores)? Que decisões você influenciou sem autoridade direta?"
+    },
+    "decisao": {
+      "rotulo": "Decisão de negócio apoiada pelo seu trabalho",
+      "entrevista": "Que decisão da liderança foi tomada com base nos seus dados, relatórios ou análises?"
+    },
+    "risco": {
+      "rotulo": "Principal risco gerenciado",
+      "entrevista": "Qual foi o principal risco que você identificou e como o tratou? O que evitou?"
+    },
+    "equipe": {
+      "rotulo": "Liderança de pessoas (tamanho, desenvolvimento)",
+      "entrevista": "Quantas pessoas liderou ou coordenou, direta ou indiretamente? O que desenvolveu nelas?"
+    },
+    "evidencia": {
+      "rotulo": "Evidência verificável (indicador, relatório, referência)",
+      "entrevista": "Como isso pode ser comprovado numa entrevista? Qual indicador, relatório ou pessoa confirmaria?"
+    },
+    "porque": {
+      "rotulo": "Por que importa para a próxima vaga",
+      "entrevista": "Que tipo de vaga isso comprova? Qual competência transferível?"
+    }
+  },
+  "historico": [
+    { "versao": 1, "data": "2026-11-03", "mudanca": "Versão inicial: conjuntos base (6 perguntas do documento de origem), competitivo e executivo." }
+  ]
+}
