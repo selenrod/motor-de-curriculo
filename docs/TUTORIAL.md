@@ -12,18 +12,21 @@ Pressupõe plano pago do Claude (Pro, Max, Team ou Enterprise). Comandos para Wi
    Feche e abra o PowerShell, depois confira: `claude --version`.
    Mac/Linux: `curl -fsSL https://claude.ai/install.sh | bash`.
 2. **Instalar Git e Python** (se ainda não tiver) e o gerador de PDF: `pip install playwright`.
-3. **Clonar o repositório fora do Drive** (Git dentro do Drive corrompe o repositório):
-   ```powershell
-   cd C:\Projetos
-   git clone https://github.com/selenrod/motor-de-curriculo
-   ```
+3. **Pasta do projeto** (onde fica o código): `E:\Users\RobertoDorneles\Documents\PRD Consultoria\Curriculo Eng. Roberto Dorneles\Motor de Curriculo`.
+   Ela deve ficar **fora do Google Drive** (Git dentro do Drive corrompe o repositório) e conter a última versão aprovada do repositório.
+   - Pasta vazia ou ainda inexistente:
+     ```powershell
+     git clone https://github.com/selenrod/motor-de-curriculo "E:\Users\RobertoDorneles\Documents\PRD Consultoria\Curriculo Eng. Roberto Dorneles\Motor de Curriculo"
+     ```
+   - Pasta com arquivos antigos: renomeie-a para `Motor de Curriculo (antigo)` e rode o comando acima (o Git não clona sobre pasta com arquivos).
+   - Já clonada: atualize com `git pull` dentro dela.
 4. **Criar a pasta de vagas no Drive**: `G:\Meu Drive\Vagas` e dentro dela `_entrada`.
 5. **Login**: dentro da pasta do projeto, rode `claude`; o navegador abre para autorizar sua conta. Para sair: `/exit`.
 
 ## 2. Abrir a sessão do projeto
 
 ```powershell
-cd C:\Projetos\motor-de-curriculo
+cd "E:\Users\RobertoDorneles\Documents\PRD Consultoria\Curriculo Eng. Roberto Dorneles\Motor de Curriculo"
 claude --add-dir "G:\Meu Drive\Vagas" --permission-mode manual
 ```
 - O Claude lê o `CLAUDE.md` sozinho (regras, formato das pastas, regra de nunca inventar).
