@@ -38,11 +38,11 @@
       "periodos": [
         {
           "periodo": "04/2026 - Atual",
-          "cargo": "Engenheiro de Planejamento"
+          "cargo": "Engenheiro de Planejamento | PMO Engenharia Corporativa"
         },
         {
-          "periodo": "07/2024 - Atual",
-          "cargo": "Trainee Geração Agro"
+          "periodo": "07/2024 - 03/2026",
+          "cargo": "Trainee Geração Agro | Excelência Operacional"
         }
       ]
     },
@@ -73,15 +73,18 @@
     {
       "titulo": "ATVOS Agroindustrial (Engenheiro de Planejamento | PMO)",
       "itens": [
-        "Responsável pela gestão do portfólio e saúde da carteira."
+        "Gerencia o portfólio de Capex de cerca de 80 projetos (aproximadamente R$ 350 milhões) em todas as unidades agroindustriais; implantou os indicadores IDP(t) e IDC (gerenciamento de valor agregado) em toda a carteira, tornando mensurável a saúde do portfólio, o que antes não era possível.",
+        "Automatizou o controle financeiro do portfólio com importação de dados do SAP, passando a medir o avanço financeiro dos projetos e a acompanhar órgão gestor, responsável pela estrutura PEP e liberação da estrutura financeira.",
+        "Substituiu o PowerPoint da reunião semanal de status por atualização no Microsoft Lists consolidada em dashboard Power BI atualizado duas vezes ao dia (financeiro, escopo, cronograma, status regulatório, contratos e boletins de medição): eliminou cerca de 4 horas semanais de montagem manual e padronizou o preenchimento dos engenheiros em um único local, com prazo fixo.",
+        "Integrou as áreas do PMO em uma fonte única e pública de informação (tabela principal de 85 colunas), permitindo gerar relatórios e cenários para priorizar os pontos da carteira que exigiam atenção e deixando claro para cada área de apoio o que fazer para mover seu indicador."
       ],
       "refino": {
-        "contexto": false,
-        "problema": false,
-        "acao": false,
-        "como": false,
-        "resultado": false,
-        "porque": false
+        "contexto": true,
+        "problema": true,
+        "acao": true,
+        "como": true,
+        "resultado": true,
+        "porque": true
       }
     },
     {
@@ -98,20 +101,22 @@
     {
       "titulo": "CWB Eletric (Engenheiro de produção)",
       "itens": [
-        "Liderando a otimização dos processos da empresa, com foco na eficiência e na produtividade",
-        "Realizando análises detalhadas das atividades da empresa, identificando oportunidades de melhorias e otimização",
-        "Gerenciando o processo de compra de materiais para projetos em andamento, garantindo o cumprimento de prazos e orçamentos",
-        "Buscando e assegurando a disponibilidade de recursos para o andamento das obras, de acordo com o cronograma estabelecido",
-        "Analisando os custos das atividades em curso e definindo prioridades para as compras de materiais, otimizando o uso dos recursos da empresa",
-        "Realizando o mapeamento dos processos e intervindo quando necessário para corrigir falhas e otimizar o desempenho",
-        "Implementando e monitorando a padronização de todos os processos da empresa, com foco na qualidade e na consistência dos resultados",
-        "Assegurando que os processos sejam documentados e facilmente auditáveis, para garantir a conformidade com os padrões de qualidade",
-        "Elaborando Procedimentos Operacionais Padronizados (POPs) para todos os setores da empresa, especialmente para a equipe de projetos, garantindo a clareza e a padronização das atividades",
-        "Realizando desenhos peças para fabricação, fabricando estruturas solares e galvanizando peças",
-        "Atendendo às necessidades específicas dos clientes, desenvolvendo e fabricando soluções personalizadas",
-        "Controlando a máquina de plasma CNC durante o processo de corte, monitorando os parâmetros e realizando ajustes quando necessário, garantindo a qualidade do corte."
+        "Fui o ponto focal entre a fábrica e cerca de 15 obras de energia solar e retrofit de subestações, em empresa de cerca de 200 funcionários e faturamento médio de R$ 800 mil a R$ 1 milhão por mês; geri o barracão com cerca de 30 pessoas, 8 máquinas de solda, plasma CNC e 4 baias de montagem.",
+        "Desenvolvi o projeto e o processo produtivo do skid para inversores e transformador a partir de um protótipo superdimensionado: revisei dimensionamento e método construtivo com base em tempos e movimentos, WIP e filas, reduzi mais de 200 kg por unidade (cerca de 6% de 3,5 t) e viabilizei a comercialização de 140 unidades em 8 meses (cerca de R$ 7,7 milhões e 28 t de aço a menos no lote).",
+        "Elevei a produção do skid de 1 para 4 unidades por semana (meta de 16 por mês, até 20 em meses de pico), direcionando peças selecionadas para o plasma CNC, criando estoque pulmão nas etapas intermediárias e organizando equipe multifuncional em revezamento entre baias.",
+        "Planejei e controlei com Last Planner System a fabricação para o retrofit de 3 subestações da Eletrobras (PR, SC e RS): 11 torres para TCs, 18 chaves seccionadoras e 8 bases para TPs, mais de 50 t em aço carbono galvanizado (NBR 6323 e ASTM A123); atendi a todos os desligamentos programados, sem nenhuma peça reprovada nas inspeções da Eletrosul.",
+        "Comprei a matéria-prima da fábrica (perfis, chapas e itens sob encomenda), com pedidos de aço de cerca de R$ 200 mil, priorizando por custo e cronograma das obras; sustentei a expedição de pedidos de cerca de 20 t por mês de estruturas para usinas solares de solo, além de entregas de cerca de 6 t quase semanais, e apoiei a gestão dos custos diretos e operacionais.",
+        "Padronizei processos produtivos e administrativos em POPs construídos a partir da rotina do chão de fábrica, traduzindo o melhor método em padrão de trabalho; os POPs apoiaram a integração de profissionais vindos das obras e deram à gestão um registro de como a fábrica funcionava.",
+        "Desenhei peças para fabricação e operei o plasma CNC, ajustando parâmetros de corte, para soluções sob medida para os clientes."
       ],
-      "refino": null
+      "refino": {
+        "contexto": true,
+        "problema": true,
+        "acao": true,
+        "como": true,
+        "resultado": true,
+        "porque": null
+      }
     },
     {
       "titulo": "IPPER Solar (Coordenador de Projetos)",
@@ -161,6 +166,8 @@
         "Office 365 | Microsoft Office | Excel Avançado + VBA",
         "Microsoft Project",
         "Microsoft Power BI",
+        "SAP (extração de dados financeiros e estrutura PEP)",
+        "Microsoft Lists",
         "R Studio",
         "VS Code",
         "AutoCAD",
